@@ -1,0 +1,24 @@
+{
+  "name": "auth-migrate",
+  "version": "1.0.0",
+  "description": "tugas4 auth-migrate",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint ./"
+  },
+  "author": "Andika Eka Putra",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cookie-parser": "^1.4.4",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^9.0.0",
+    "morgan": "^1.9.1",
+    "mysql2": "^3.3.2",
+    "pg": "^7.17.1",
+    "pg-hstore": "^2.3.3",
+    "sequelize": "^6.31.1"
+  }
+}
