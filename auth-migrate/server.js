@@ -37,11 +37,3 @@ require('./app/router/router.js')(app)
 db.sequelize.sync().then(() => {
   app.listen(port, () => console.log(title + ' run on ' + baseUrl))
 })
-
-// {
-//   "auth": true,
-//   "id": "333id",
-//   "accessToken": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjMzM2lkIiwiaWF0IjoxNjg1MzIwNzk2LCJleHAiOjE2ODU0MDcxOTZ9.27rdBsIWsg5PgmpgxbMx6XFjgXhgN4CV5bGyKpigbvU",
-//   "message": "Error",
-//   "errors": null
-// }
