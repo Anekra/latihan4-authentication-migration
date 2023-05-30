@@ -23,7 +23,7 @@ module.exports = {
       },
       rating: {
         allowNull: false,
-        type: Sequelize.STRING
+        type: Sequelize.DOUBLE
       },
       createdAt: {
         allowNull: false,

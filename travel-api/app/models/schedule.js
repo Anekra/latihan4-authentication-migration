@@ -1,23 +1,26 @@
 'use strict';
-const {
-  Model
-} = require('sequelize');
+const { Model } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class Schedule extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
-    static associate(models) {
-      // define association here
-    }
+    static associate(models) {}
   }
-  Schedule.init({
-    start_date: DataTypes.DATE
-  }, {
-    sequelize,
-    modelName: 'Schedule',
-  });
+  Schedule.init(
+    {
+      id: {
+        type: DataTypes.STRING,
+        primaryKey: true,
+        allowNull: false
+      },
+      destination_id: DataTypes.STRING,
+      start_date: DataTypes.DATE,
+      end_date: DataTypes.DATE,
+      itinerary: DataTypes.TEXT,
+      accommodation: DataTypes.STRING
+    },
+    {
+      sequelize,
+      modelName: 'Schedule'
+    }
+  );
   return Schedule;
 };

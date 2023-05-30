@@ -11,7 +11,7 @@ module.exports = {
       },
       destination_id: {
         allowNull: false,
-        type: Sequelize.UUID,
+        type: Sequelize.STRING,
         references: {
           model: 'Destination',
           key: 'id'
@@ -43,7 +43,7 @@ module.exports = {
       }
     });
   },
-  async down(queryInterface, Sequelize) {
+  async down(queryInterface, _) {
     await queryInterface.dropTable('Schedules');
   }
 };

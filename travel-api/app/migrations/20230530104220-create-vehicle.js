@@ -7,7 +7,7 @@ module.exports = {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        type: Sequelize.STRING
       },
       vehicle_name: {
         type: Sequelize.STRING
@@ -49,7 +49,7 @@ module.exports = {
       }
     });
   },
-  async down(queryInterface, Sequelize) {
+  async down(queryInterface, _) {
     await queryInterface.dropTable('Vehicles');
   }
 };

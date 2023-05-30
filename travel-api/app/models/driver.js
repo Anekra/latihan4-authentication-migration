@@ -1,23 +1,30 @@
 'use strict';
-const {
-  Model
-} = require('sequelize');
+const { Model } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class Driver extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
-    static associate(models) {
-      // define association here
-    }
+    static associate(models) {}
   }
-  Driver.init({
-    driver_name: DataTypes.STRING
-  }, {
-    sequelize,
-    modelName: 'Driver',
-  });
+  Driver.init(
+    {
+      id: {
+        type: DataTypes.UUID,
+        primaryKey: true,
+        allowNull: false
+      },
+      email: DataTypes.STRING,
+      password: DataTypes.STRING,
+      driver_name: DataTypes.STRING,
+      name: DataTypes.STRING,
+      contact_number: DataTypes.STRING,
+      gender: DataTypes.ENUM('Male', 'Female'),
+      license_type: DataTypes.ENUM('SIM A', 'SIM B1'),
+      license_number: DataTypes.STRING,
+      birth_date: DataTypes.DATE
+    },
+    {
+      sequelize,
+      modelName: 'Driver'
+    }
+  );
   return Driver;
 };

@@ -28,7 +28,7 @@ module.exports = {
         type: Sequelize.DOUBLE
       },
       payment_status: {
-        type: Sequelize.ENUM('Success', 'Pending', 'Cancel', 'Expired')
+        type: Sequelize.ENUM('Success', 'Pending', 'Canceled', 'Expired')
       },
       createdAt: {
         allowNull: false,
