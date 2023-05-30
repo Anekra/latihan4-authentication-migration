@@ -1,21 +1,15 @@
 'use strict';
-
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
-  async up (queryInterface, Sequelize) {
-    await queryInterface.createTable('Customers', {
+  async up(queryInterface, Sequelize) {
+    await queryInterface.createTable('Drivers', {
       id: {
         allowNull: false,
+        autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.STRING
+        type: Sequelize.INTEGER
       },
-      name: {
-        type: Sequelize.STRING
-      },
-      email: {
-        type: Sequelize.STRING
-      },
-      password: {
+      driver_name: {
         type: Sequelize.STRING
       },
       createdAt: {
@@ -26,10 +20,9 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATE
       }
-    })
+    });
   },
-
-  async down (queryInterface, _) {
-    await queryInterface.dropTable('Customers');
+  async down(queryInterface, Sequelize) {
+    await queryInterface.dropTable('Drivers');
   }
 };
