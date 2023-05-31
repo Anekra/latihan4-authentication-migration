@@ -52,11 +52,11 @@ module.exports = {
         allowNull: false,
         type: Sequelize.ENUM('Active', 'Success', 'Pending', 'Expired', 'Canceled')
       },
-      createdAt: {
+      created_at: {
         allowNull: false,
         type: Sequelize.DATE
       },
-      updatedAt: {
+      updated_at: {
         allowNull: false,
         type: Sequelize.DATE
       }

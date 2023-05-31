@@ -30,11 +30,11 @@ module.exports = {
       payment_status: {
         type: Sequelize.ENUM('Success', 'Pending', 'Canceled', 'Expired')
       },
-      createdAt: {
+      created_at: {
         allowNull: false,
         type: Sequelize.DATE
       },
-      updatedAt: {
+      updated_at: {
         allowNull: false,
         type: Sequelize.DATE
       }
