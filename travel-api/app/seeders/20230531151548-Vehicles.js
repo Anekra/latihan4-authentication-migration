@@ -2,24 +2,40 @@
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
-  async up (queryInterface, Sequelize) {
-    /**
-     * Add seed commands here.
-     *
-     * Example:
-     * await queryInterface.bulkInsert('People', [{
-     *   name: 'John Doe',
-     *   isBetaMember: false
-     * }], {});
-    */
+  async up(queryInterface, _) {
+    await queryInterface.bulkInsert(
+      'Vehicles',
+      [
+        {
+          vehicle_name: 'Car A',
+          vehicle_type: 'Sedan',
+          year: new Date(2022, 0, 1),
+          manufacturer: 'Manufacturer A',
+          model: 'Model A',
+          color: 'Red',
+          license_plate: 'ABC123',
+          mileage: 5000,
+          fuel_type: 'gasoline',
+          transmission: 'automatic'
+        },
+        {
+          vehicle_name: 'Car B',
+          vehicle_type: 'SUV',
+          year: new Date(2020, 0, 1),
+          manufacturer: 'Manufacturer B',
+          model: 'Model B',
+          color: 'Blue',
+          license_plate: 'XYZ789',
+          mileage: 10000,
+          fuel_type: 'diesel',
+          transmission: 'manual'
+        }
+      ],
+      {}
+    );
   },
 
-  async down (queryInterface, Sequelize) {
-    /**
-     * Add commands to revert seed here.
-     *
-     * Example:
-     * await queryInterface.bulkDelete('People', null, {});
-     */
+  async down(queryInterface, _) {
+    await queryInterface.bulkDelete('Vehicles', null, {});
   }
 };
