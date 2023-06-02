@@ -5,15 +5,21 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       Schedule.belongsToMany(models.Destination, {
         through: 'schedule_details',
-        foreignKey: 'schedule_id',
-        otherKey: 'destination_id'
-      })
+        foreignKey: {
+          name: 'schedule_id',
+          type: DataTypes.STRING
+        },
+        otherKey: {
+          name: 'destination_id',
+          type: DataTypes.STRING
+        }
+      });
       Schedule.hasOne(models.Booking, {
-        foreignKey: "schedule_id",
-        as: "schedule",
-        onDelete: "CASCADE",
-        onUpdate: "CASCADE"
-      })
+        foreignKey: 'schedule_id',
+        as: 'schedule',
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE'
+      });
     }
   }
   Schedule.init(

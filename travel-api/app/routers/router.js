@@ -1,7 +1,7 @@
-const verifySignUpController = require('../api').verifySignUp
-const verifySignController = require('../api').verifySign
-const statusController = require('../api').status
-const verifyJwtTokenController = require('../api').verifyJwtToken
+const verifySignUpController = require('../controllers').verifySignUp
+const verifySignController = require('../controllers').verifySign
+const statusController = require('../controllers').status
+const verifyJwtTokenController = require('../controllers').verifyJwtToken
 
 module.exports = function (app) {
   // User Auth

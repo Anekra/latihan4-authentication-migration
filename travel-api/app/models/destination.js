@@ -5,9 +5,15 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       Destination.belongsToMany(models.Schedule, {
         through: 'schedule_details',
-        foreignKey: 'destination_id',
-        otherKey: 'schedule_id'
-      })
+        foreignKey: {
+          name: 'destination_id',
+          type: DataTypes.STRING
+        },
+        otherKey: {
+          name: 'schedule_id',
+          type: DataTypes.STRING
+        }
+      });
     }
   }
   Destination.init(
