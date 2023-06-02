@@ -2,7 +2,14 @@
 const { Model } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class Payment extends Model {
-    static associate(models) {}
+    static associate(models) {
+      Payment.hasOne(models.Booking, {
+        foreignKey: 'payment_id',
+        as: 'payment',
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE'
+      })
+    }
   }
   Payment.init(
     {
@@ -11,7 +18,6 @@ module.exports = (sequelize, DataTypes) => {
         primaryKey: true,
         allowNull: false
       },
-      booking_id: DataTypes.DOUBLE,
       total_amount_due: DataTypes.DOUBLE,
       total_amount_given: DataTypes.DOUBLE,
       total_change: DataTypes.DOUBLE,

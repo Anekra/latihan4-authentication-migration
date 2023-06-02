@@ -2,5 +2,5 @@ require('dotenv').config()
 
 module.exports = {
   secret: process.env.SECRET,
-  roles: ['Admin', 'Customer', 'Driver', 'Manager']
+  roles: ['Admin', 'Customer', 'Driver']
 }

@@ -15,8 +15,13 @@ module.exports = (sequelize, DataTypes) => {
         otherKey: 'roleId'
       })
       User.hasMany(models.Status, {
-        foreignKey: 'user_id',
-        as: 'statuses'
+        foreignKey: {
+          name: 'user_id',
+          allowNull: false
+        },
+        as: 'statuses',
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE'
       })
     }
   }

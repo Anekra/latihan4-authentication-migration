@@ -8,16 +8,6 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.STRING
       },
-      booking_id: {
-        allowNull: false,
-        type: Sequelize.UUID,
-        references: {
-          model: 'Booking',
-          key: 'id'
-        },
-        onUpdate: 'CASCADE',
-        onDelete: 'CASCADE'
-      },
       total_amount_due: {
         type: Sequelize.DOUBLE
       },
