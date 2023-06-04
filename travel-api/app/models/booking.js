@@ -40,11 +40,20 @@ module.exports = (sequelize, DataTypes) => {
         'Pending',
         'Expired',
         'Canceled'
-      )
+      ),
+      created_at: {
+        allowNull: false,
+        type: DataTypes.DATE
+      },
+      updated_at: {
+        allowNull: false,
+        type: DataTypes.DATE
+      }
     },
     {
       sequelize,
-      modelName: 'Booking'
+      modelName: 'Booking',
+      timestamps: false
     }
   );
   return Booking;

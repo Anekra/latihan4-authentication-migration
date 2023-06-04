@@ -1,55 +1,71 @@
-const User = require('../models').User
-const config = require('../config/configRoles.js')
-const ROLEs = config.ROLEs
+const User = require('../models').User;
+const userId = require('../utils/user_id_generator');
+const config = require('../config/configRoles');
+const roles = config.roles;
+
+const generatedId = async () => {
+  return await userId.generateUserId()
+};
 
 module.exports = {
-  checkDuplicateUserNameOrEmail (req, res, next) {
-    User.findOne({
-      where: {
-        id: req.body.id
-      }
-    }).then(user => {
-      if (user) {
-        res.status(400).send({
+
+  async checkDuplicateUserNameOrEmail(req, res, next) {
+    try {
+      const existingUser = await User.findOne({
+        where: {
+          id: await generatedId()
+        }
+      });
+
+      if (existingUser) {
+        return res.status(400).send({
           auth: false,
-          id: req.body.id,
+          id: await generatedId(),
           message: 'Error',
           errors: 'Id is already taken!'
-        })
-        return
+        });
       }
 
-      User.findOne({
+      const userWithEmail = await User.findOne({
         where: {
           email: req.body.email
         }
-      }).then(user => {
-        if (user) {
-          res.status(400).send({
-            auth: false,
-            id: req.body.id,
-            message: 'Error',
-            errors: 'Email is already taken!'
-          })
-          return
-        }
-        next()
-      })
-    })
+      });
+
+      if (userWithEmail) {
+        return res.status(400).send({
+          auth: false,
+          id: await generatedId(),
+          message: 'Error',
+          errors: 'Email is already taken!'
+        });
+      }
+
+      next();
+    } catch (error) {
+      console.error(error);
+      res.status(500).send({
+        auth: false,
+        message: 'Error',
+        errors: 'Server error'
+      });
+    }
   },
 
-  checkRolesExisted (req, res, next) {
-    for (let i = 0; i < req.body.roles.length; i++) {
-      if (!ROLEs.includes(req.body.roles[i].toUpperCase())) {
-        res.status(400).send({
-          auth: false,
-          id: req.body.id,
-          message: 'Error',
-          errors: 'Does NOT exist Role = ' + req.body.roles[i]
-        })
-        return
-      }
+  async checkRolesExisted(req, res, next) {
+    const invalidRoles = req.body.roles.filter(
+      (role) => !roles.includes(role.toUpperCase())
+    );
+
+    if (invalidRoles.length > 0) {
+      return res.status(400).send({
+        auth: false,
+        id: await generatedId(),
+        message: 'Error',
+        errors: `Does NOT exist Role(s): ${invalidRoles.join(', ')}`
+      });
     }
-    next()
+
+    next();
   }
-}
+};

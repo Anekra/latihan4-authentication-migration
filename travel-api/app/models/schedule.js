@@ -32,11 +32,20 @@ module.exports = (sequelize, DataTypes) => {
       start_date: DataTypes.DATE,
       end_date: DataTypes.DATE,
       itinerary: DataTypes.TEXT,
-      accommodation: DataTypes.STRING
+      accommodation: DataTypes.STRING,
+      created_at: {
+        allowNull: false,
+        type: DataTypes.DATE
+      },
+      updated_at: {
+        allowNull: false,
+        type: DataTypes.DATE
+      }
     },
     {
       sequelize,
-      modelName: 'Schedule'
+      modelName: 'Schedule',
+      timestamps: false
     }
   );
   return Schedule;

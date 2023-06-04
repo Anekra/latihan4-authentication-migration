@@ -4,8 +4,52 @@ module.exports = (sequelize, DataTypes) => {
   class User extends Model {
     
     static associate(models) {
+      User.belongsToMany(models.Role, {
+        through: 'user_roles',
+        foreignKey: 'userId',
+        otherKey: 'roleId'
+      })
+      User.hasMany(models.Status, {
+        foreignKey: {
+          name: 'user_id',
+          allowNull: false
+        },
+        as: 'statuses',
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE'
+      })
+      User.hasOne(models.Admin, {
+        foreignKey: {
+          name: 'user_id',
+          allowNull: false
+        },
+        as: 'admins',
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE'
+      })
+      User.hasOne(models.Customer, {
+        foreignKey: {
+          name: 'user_id',
+          allowNull: false
+        },
+        as: 'customers',
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE'
+      })
+      User.hasOne(models.Driver, {
+        foreignKey: {
+          name: 'user_id',
+          allowNull: false
+        },
+        as: 'drivers',
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE'
+      })
     }
+
+    static codeName = 'usr';
   }
+
   User.init(
     {
       id: {
@@ -15,11 +59,20 @@ module.exports = (sequelize, DataTypes) => {
       },
       name: DataTypes.STRING,
       email: DataTypes.STRING,
-      password: DataTypes.STRING
+      password: DataTypes.STRING,
+      created_at: {
+        allowNull: false,
+        type: DataTypes.DATE
+      },
+      updated_at: {
+        allowNull: false,
+        type: DataTypes.DATE
+      }
     },
     {
       sequelize,
-      modelName: 'User'
+      modelName: 'User',
+      timestamps: false
     }
   );
   return User;

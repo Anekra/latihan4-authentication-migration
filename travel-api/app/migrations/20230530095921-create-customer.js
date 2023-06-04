@@ -8,30 +8,27 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.UUID
       },
-      email: {
-        allowNull: false,
-        unique: true,
-        type: Sequelize.STRING
-      },
-      password: {
-        allowNull: false,
-        type: Sequelize.STRING
-      },
       name: {
-        allowNull: false,
         type: Sequelize.STRING
       },
       contact_number: {
-        allowNull: false,
         type: Sequelize.STRING
       },
       gender: {
-        allowNull: false,
         type: Sequelize.ENUM('Male', 'Female')
       },
       birth_date: {
-        allowNull: false,
         type: Sequelize.DATE
+      },
+      user_id: {
+        allowNull: false,
+        type: Sequelize.STRING,
+        references: {
+          model: 'Users',
+          key: 'id'
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE'
       },
       created_at: {
         allowNull: false,

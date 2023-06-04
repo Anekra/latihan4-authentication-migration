@@ -8,37 +8,33 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.UUID
       },
-      email: {
-        allowNull: false,
-        unique: true,
-        type: Sequelize.STRING
-      },
-      password: {
-        allowNull: false,
-        type: Sequelize.STRING
-      },
       driver_name: {
         type: Sequelize.STRING
       },
       contact_number: {
-        allowNull: false,
         type: Sequelize.STRING
       },
       gender: {
-        allowNull: false,
         type: Sequelize.ENUM('Male', 'Female')
       },
       license_type: {
-        allowNull: false,
         type: Sequelize.ENUM('SIM A', 'SIM B1')
       },
       license_number: {
-        allowNull: false,
         type: Sequelize.STRING
       },
       birth_date: {
-        allowNull: false,
         type: Sequelize.DATE
+      },
+      user_id: {
+        allowNull: false,
+        type: Sequelize.STRING,
+        references: {
+          model: 'Users',
+          key: 'id'
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE'
       },
       created_at: {
         allowNull: false,

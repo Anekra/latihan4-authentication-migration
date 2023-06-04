@@ -4,6 +4,11 @@ module.exports = (sequelize, DataTypes) => {
   class Role extends Model {
     
     static associate(models) {
+      Role.belongsToMany(models.User, {
+        through: 'user_roles',
+        foreignKey: 'roleId',
+        otherKey: 'userId'
+      })
     }
   }
   Role.init(
@@ -14,11 +19,20 @@ module.exports = (sequelize, DataTypes) => {
         auto_increment: true,
         type: DataTypes.INTEGER
       },
-      name: DataTypes.STRING
+      name: DataTypes.STRING,
+      created_at: {
+        allowNull: false,
+        type: DataTypes.DATE
+      },
+      updated_at: {
+        allowNull: false,
+        type: DataTypes.DATE
+      }
     },
     {
       sequelize,
-      modelName: 'Role'
+      modelName: 'Role',
+      timestamps: false
     }
   );
   return Role;

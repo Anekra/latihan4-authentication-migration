@@ -26,11 +26,20 @@ module.exports = (sequelize, DataTypes) => {
       destination_name: DataTypes.STRING,
       description: DataTypes.STRING,
       image_url: DataTypes.STRING,
-      rating: DataTypes.DOUBLE
+      rating: DataTypes.DOUBLE,
+      created_at: {
+        allowNull: false,
+        type: DataTypes.DATE
+      },
+      updated_at: {
+        allowNull: false,
+        type: DataTypes.DATE
+      }
     },
     {
       sequelize,
-      modelName: 'Destination'
+      modelName: 'Destination',
+      timestamps: false
     }
   );
   return Destination;

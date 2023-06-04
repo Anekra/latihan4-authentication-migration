@@ -7,6 +7,7 @@ module.exports = {
       'Vehicles',
       [
         {
+          id: 'vehicle001',
           vehicle_name: 'Car A',
           vehicle_type: 'Sedan',
           year: new Date(2022, 0, 1),
@@ -16,9 +17,12 @@ module.exports = {
           license_plate: 'ABC123',
           mileage: 5000,
           fuel_type: 'gasoline',
-          transmission: 'automatic'
+          transmission: 'automatic',
+          created_at: new Date(),
+          updated_at: new Date()
         },
         {
+          id: 'vehicle002',
           vehicle_name: 'Car B',
           vehicle_type: 'SUV',
           year: new Date(2020, 0, 1),
@@ -28,7 +32,9 @@ module.exports = {
           license_plate: 'XYZ789',
           mileage: 10000,
           fuel_type: 'diesel',
-          transmission: 'manual'
+          transmission: 'manual',
+          created_at: new Date(),
+          updated_at: new Date()
         }
       ],
       {}

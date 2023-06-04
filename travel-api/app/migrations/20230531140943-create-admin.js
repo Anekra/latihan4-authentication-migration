@@ -9,17 +9,17 @@ module.exports = {
         type: Sequelize.UUID
       },
       username: {
-        allowNull: false,
         type: Sequelize.STRING
       },
-      email: {
+      user_id: {
         allowNull: false,
-        unique: true,
-        type: Sequelize.STRING
-      },
-      password: {
-        allowNull: false,
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        references: {
+          model: 'Users',
+          key: 'id'
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE'
       },
       created_at: {
         allowNull: false,

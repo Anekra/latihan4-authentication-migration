@@ -3,9 +3,9 @@ const { Model } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class Customer extends Model {
     static associate(models) {
-      Customer.hasMany(models.Booking, {
-        foreignKey: 'customer_id',
-        as: 'customer',
+      Customer.belongsTo(models.User, {
+        foreignKey: 'user_id',
+        as: 'user_customer',
         onDelete: 'CASCADE',
         onUpdate: 'CASCADE'
       })
@@ -14,20 +14,38 @@ module.exports = (sequelize, DataTypes) => {
   Customer.init(
     {
       id: {
-        type: DataTypes.UUID,
+        allowNull: false,
         primaryKey: true,
-        allowNull: false
+        type: DataTypes.UUID,
+        defaultValue: DataTypes.UUIDV4
       },
-      email: DataTypes.STRING,
-      password: DataTypes.STRING,
       name: DataTypes.STRING,
       contact_number: DataTypes.STRING,
       gender: DataTypes.ENUM('Male', 'Female'),
-      birth_date: DataTypes.DATE
+      birth_date: DataTypes.DATE,
+      user_id: {
+        allowNull: false,
+        type: DataTypes.STRING,
+        references: {
+          model: 'Users',
+          key: 'id'
+        },
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE'
+      },
+      created_at: {
+        allowNull: false,
+        type: DataTypes.DATE
+      },
+      updated_at: {
+        allowNull: false,
+        type: DataTypes.DATE
+      }
     },
     {
       sequelize,
-      modelName: 'Customer'
+      modelName: 'Customer',
+      timestamps: false
     }
   );
   return Customer;

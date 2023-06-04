@@ -2,7 +2,8 @@
 const { Model } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class Vehicle extends Model {
-    static associate(models) {}
+    static associate(_) {
+    }
   }
   Vehicle.init(
     {
@@ -20,11 +21,20 @@ module.exports = (sequelize, DataTypes) => {
       license_plate: DataTypes.STRING,
       mileage: DataTypes.STRING,
       fuel_type: DataTypes.ENUM('gasoline', 'diesel', 'electric'),
-      transmission: DataTypes.ENUM('manual', 'automatic')
+      transmission: DataTypes.ENUM('manual', 'automatic'),
+      created_at: {
+        allowNull: false,
+        type: DataTypes.DATE
+      },
+      updated_at: {
+        allowNull: false,
+        type: DataTypes.DATE
+      }
     },
     {
       sequelize,
-      modelName: 'Vehicle'
+      modelName: 'Vehicle',
+      timestamps: false
     }
   );
   return Vehicle;

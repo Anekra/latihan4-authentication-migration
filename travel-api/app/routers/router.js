@@ -1,42 +1,43 @@
-const verifySignUpController = require('../controllers').verifySignUp
-const verifySignController = require('../controllers').verifySign
-const statusController = require('../controllers').status
-const verifyJwtTokenController = require('../controllers').verifyJwtToken
+const controllers = require('../controllers');
 
 module.exports = function (app) {
   // User Auth
-  app.post('/api/auth/signup',
-    [verifySignUpController.checkDuplicateUserNameOrEmail,
-      verifySignUpController.checkRolesExisted
+  app.post(
+    '/api/auth/signup',
+    [
+      controllers.verifySignUp.checkDuplicateUserNameOrEmail,
+      controllers.verifySignUp.checkRolesExisted
     ],
-    verifySignController.signup)
+    controllers.verifySign.signUp
+  );
 
-  app.post('/api/auth/signin', verifySignController.signin)
+  app.post('/api/auth/signin', controllers.verifySign.signIn);
 
   // Status
-  app.get('/api/status',
-    statusController.list)
-  app.get('/api/statususer',
-    [verifyJwtTokenController.verifyToken],
-    statusController.listStatusUser)
-  app.get('/api/status/:id',
-    [verifyJwtTokenController.verifyToken,
-      verifyJwtTokenController.isAdmin
-    ],
-    statusController.getById)
-  app.post('/api/status',
-    [verifyJwtTokenController.verifyToken,
-      verifyJwtTokenController.isAdmin
-    ],
-    statusController.add)
-  app.put('/api/status/:id',
-    [verifyJwtTokenController.verifyToken,
-      verifyJwtTokenController.isAdmin
-    ],
-    statusController.update)
-  app.delete('/api/status/:id',
-    [verifyJwtTokenController.verifyToken,
-      verifyJwtTokenController.isAdmin
-    ],
-    statusController.delete)
-}
+  app.get('/api/status', controllers.status.list);
+  app.get(
+    '/api/statususer',
+    [controllers.verifyJwtToken.verifyToken],
+    controllers.status.listStatusUser
+  );
+  app.get(
+    '/api/status/:id',
+    [controllers.verifyJwtToken.verifyToken, controllers.verifyJwtToken.isAdmin],
+    controllers.status.getById
+  );
+  app.post(
+    '/api/status',
+    [controllers.verifyJwtToken.verifyToken, controllers.verifyJwtToken.isAdmin],
+    controllers.status.add
+  );
+  app.put(
+    '/api/status/:id',
+    [controllers.verifyJwtToken.verifyToken, controllers.verifyJwtToken.isAdmin],
+    controllers.status.update
+  );
+  app.delete(
+    '/api/status/:id',
+    [controllers.verifyJwtToken.verifyToken, controllers.verifyJwtToken.isAdmin],
+    controllers.status.delete
+  );
+};
