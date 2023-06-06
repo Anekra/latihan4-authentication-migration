@@ -32,31 +32,39 @@ module.exports = {
 
       await user.setRoles(roles);
 
-      req.body.roles.forEach(async (role) => {
-        switch (role.toLowerCase()) {
-          case 'admin':
-            await Admin.create({
-              user_id: user.id,
-              created_at: new Date(),
-              updated_at: new Date()
-            });
-            break;
-          case 'customer':
-            await Customer.create({
-              user_id: user.id,
-              created_at: new Date(),
-              updated_at: new Date()
-            });
-            break;
-          case 'driver':
-            await Driver.create({
-              user_id: user.id,
-              created_at: new Date(),
-              updated_at: new Date()
-            });
-            break;
-        }
-      });
+      await Promise.all(
+        req.body.roles.map(async (role) => {
+          try {
+            switch (role.toLowerCase()) {
+              case 'admin':
+                await Admin.create({
+                  user_id: user.id,
+                  created_at: new Date(),
+                  updated_at: new Date()
+                });
+                break;
+              case 'customer':
+                await Customer.create({
+                  user_id: user.id,
+                  created_at: new Date(),
+                  updated_at: new Date()
+                });
+                break;
+              case 'driver':
+                await Driver.create({
+                  user_id: user.id,
+                  created_at: new Date(),
+                  updated_at: new Date()
+                });
+                break;
+              default:
+                throw new Error(`Invalid role: ${role}`);
+            }
+          } catch (err) {
+            throw new Error(`Error creating ${role}: ${err.message}`);
+          }
+        })
+      );
 
       res.status(200).send({
         auth: true,

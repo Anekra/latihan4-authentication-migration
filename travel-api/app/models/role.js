@@ -2,13 +2,14 @@
 const { Model } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class Role extends Model {
-    
     static associate(models) {
       Role.belongsToMany(models.User, {
         through: 'user_roles',
-        foreignKey: 'roleId',
-        otherKey: 'userId'
-      })
+        foreignKey: 'role_id',
+        otherKey: 'user_id',
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE'
+      });
     }
   }
   Role.init(
@@ -16,8 +17,7 @@ module.exports = (sequelize, DataTypes) => {
       id: {
         allowNull: false,
         primaryKey: true,
-        auto_increment: true,
-        type: DataTypes.INTEGER
+        type: DataTypes.STRING
       },
       name: DataTypes.STRING,
       created_at: {

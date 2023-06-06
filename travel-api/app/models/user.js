@@ -2,13 +2,14 @@
 const { Model } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
-    
     static associate(models) {
       User.belongsToMany(models.Role, {
         through: 'user_roles',
-        foreignKey: 'userId',
-        otherKey: 'roleId'
-      })
+        foreignKey: 'user_id',
+        otherKey: 'role_id',
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE'
+      });
       User.hasMany(models.Status, {
         foreignKey: {
           name: 'user_id',
@@ -17,7 +18,7 @@ module.exports = (sequelize, DataTypes) => {
         as: 'statuses',
         onDelete: 'CASCADE',
         onUpdate: 'CASCADE'
-      })
+      });
       User.hasOne(models.Admin, {
         foreignKey: {
           name: 'user_id',
@@ -26,7 +27,7 @@ module.exports = (sequelize, DataTypes) => {
         as: 'admins',
         onDelete: 'CASCADE',
         onUpdate: 'CASCADE'
-      })
+      });
       User.hasOne(models.Customer, {
         foreignKey: {
           name: 'user_id',
@@ -35,7 +36,7 @@ module.exports = (sequelize, DataTypes) => {
         as: 'customers',
         onDelete: 'CASCADE',
         onUpdate: 'CASCADE'
-      })
+      });
       User.hasOne(models.Driver, {
         foreignKey: {
           name: 'user_id',
@@ -44,7 +45,7 @@ module.exports = (sequelize, DataTypes) => {
         as: 'drivers',
         onDelete: 'CASCADE',
         onUpdate: 'CASCADE'
-      })
+      });
     }
 
     static codeName = 'usr';
